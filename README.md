@@ -86,15 +86,17 @@ Lograr elaborar parte del Backend, similar al empleado en un modelo corporativo 
 
 Gracias al seguimiento paso a paso de la práctica, el alumno debe ser capaz de reconocer el flujo básico de la información en una metodología orientada a Servicios, así como las directivas necesarias para la consecución de un desarrollo MVC completo.
 
-<br/>
+<br/><br/>
 
 ## 2. Presentación de la aplicación
 
 Tal como se ha detallado anteriormente, vamos a completar una herramienta para la gestión de salas de reunión. Hoy en día, casi todas las aplicaciones web poseen parte móvil y parte web, pero en este caso únicamente nos centraremos en el backend, puesto que seguiremos el concepto de centralización de negocio (backend único, sea cual sea el número de fronts).
 
-<br/>
+<br/><br/>
 
 ## 3. Desarrollo
+
+<br/>
 
 ### 3.1 PASO 1: Modelo de datos
 
@@ -132,7 +134,9 @@ Se crea una aplicacción mediante "Spring Starter Project" cambiando unicamente 
 * Artifact : rooms
 * Package : com.uv.rooms
 
-Creado el proyecto, se compueba que funciona correctamente seleccionando el fichero "bootable" RoomsApplication.java y lanzandolo mediante "Run as Spring Boot App".
+Creado el proyecto, se comprueba que funciona correctamente seleccionando el fichero "bootable" RoomsApplication.java y lanzandolo mediante "Run as Spring Boot App".
+
+<br/>
 
 #### 3.2.1 Dependencias
 
@@ -163,6 +167,8 @@ URL:jdbc:h2:mem:testdb
 <br/>
 
 ### 3.3 PASO 3: Construcción del backend
+
+<br/>
 
 #### 3.3.1 Capa de acceso a datos
 * Creación de la entidad:
@@ -206,6 +212,9 @@ import com.uv.rooms.model.Room;
 public interface RoomJpaRepository extends JpaRepository<Room, Long> {
 }
 ```
+
+<br/>
+
 #### 3.3.2 Capa lógica de negocio
 * Creación de la interface service:
 ```
@@ -282,6 +291,9 @@ public class BookServiceUnitTest {
 ```
 Run as "JUnit Test" (JUnit 4)
 ```
+
+<br/>
+
 #### 3.3.3 Capa de API
 * Añadir la dependencia necesarias (pom.xml):
 ```
@@ -399,4 +411,6 @@ public class RoomController {
 ```
 localhost:8080/findAll
 ```
+<br/>
+
 #### 3.3.4 Resto

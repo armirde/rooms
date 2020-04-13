@@ -9,7 +9,12 @@
   * [1.1 Preparación de los entornos](https://github.com/armirde/rooms/blob/master/README.md#11-preparaci%C3%B3n-de-los-entornos)<br/>
   * [1.2 Sinopsis de la Aplicación Web](https://github.com/armirde/rooms/blob/master/README.md#12-sinopsis-de-la-aplicaci%C3%B3n-web)<br/>
   * [1.3 Objetivos](https://github.com/armirde/rooms/blob/master/README.md#13-objetivos)<br/><br/>
-* [2. Presentación de la aplicación](https://github.com/armirde/rooms/blob/master/README.md#2-presentaci%C3%B3n-de-la-aplicaci%C3%B3n)<br/><br/>
+* [2. Presentación de la aplicación](https://github.com/armirde/rooms/blob/master/README.md#2-presentaci%C3%B3n-de-la-aplicaci%C3%B3n)<br/>
+  * [2.1 Contratos desde frontend a backend](https://github.com/armirde/rooms/blob/master/README.md#21-Contratos-desde-frontend-a-backend)<br/>
+    * [2.1.1 Listado de salas](https://github.com/armirde/rooms/blob/master/README.md#211-listado-de-salas)<br/>
+    * [2.1.2 Listado de usuarios](https://github.com/armirde/rooms/blob/master/README.md#212-listado-de-usuarios)<br/>
+    * [2.1.3 Reservar sala](https://github.com/armirde/rooms/blob/master/README.md#213-reservar-sala)<br/>
+    * [2.1.4 Liberar sala](https://github.com/armirde/rooms/blob/master/README.md#214-liberar-sala)<br/><br/>
 * [3. Desarrollo](https://github.com/armirde/rooms/blob/master/README.md#3-desarrollo)<br/>
   * [3.1 PASO 1: Modelo de datos](https://github.com/armirde/rooms/blob/master/README.md#31-paso-1-modelo-de-datos)<br/>
   * [3.2 PASO 2: Creación del proyecto](https://github.com/armirde/rooms/blob/master/README.md#32-paso-2-creaci%C3%B3n-del-proyecto)<br/>
@@ -81,7 +86,8 @@ C:\dev\jdk1.8.0_172\bin\javaw.exe
 Se presenta una aplicación para la gestión de salas de reunión de una oficina. En ella, se puede encontrar estas opciones:
 * __Listado de salas:__ Donde se presentará el listado de salas y su estado.
 * __Listado de usuarios:__ Donde se presentará el listado de usuarios.
-* __Reservar de sala:__ Donde se permite realizar la reserva/liberación de una sala para un usuario.
+* __Reservar sala:__ Donde se permite realizar la reserva de una sala para un usuario.
+* __Liberar sala:__ Donde se permite realizar liberación de una sala para un usuario.
 
 <br/>
 
@@ -96,6 +102,151 @@ Gracias al seguimiento paso a paso de la práctica, el alumno debe ser capaz de 
 ## 2. Presentación de la aplicación
 
 Tal como se ha detallado anteriormente, vamos a completar una herramienta para la gestión de salas de reunión. Hoy en día, casi todas las aplicaciones web poseen parte móvil y parte web, pero en este caso únicamente nos centraremos en el backend, puesto que seguiremos el concepto de centralización de negocio (backend único, sea cual sea el número de fronts).
+
+### 2.1 Contratos desde frontend a backend
+
+#### 2.1.1 Listado de salas
+<table>
+	<tr>
+  		<th>OPERACIÓN REST</th>
+		<td>GET</b></td>
+	</tr>
+	<tr>
+  		<th>URL PÚBLICA AL SERVICIO</th>
+		<td>localhost:8080/<b>room/findAll</b></td>
+	</tr>
+	<tr>
+  		<th>PARÁMETRO DE ENTRADA</th>
+		<td>
+		</td>
+	</tr>
+	<tr>
+  		<th>PARÁMETRO DE SALIDA</th>
+		<td>
+			<i>[ {<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;"id": 1,<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;"name": "Room 1",<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;"user": {<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": 1,<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "John",<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"surname": "Doe"<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+			} ]</i>
+		</td>
+	</tr>
+</table>
+
+<br/>
+
+#### 2.1.2 Listado de usuarios
+<table>
+	<tr>
+  		<th>OPERACIÓN REST</th>
+		<td>GET</b></td>
+	</tr>
+	<tr>
+  		<th>URL PÚBLICA AL SERVICIO</th>
+		<td>localhost:8080/<b>user/findAll</b></td>
+	</tr>
+	<tr>
+  		<th>PARÁMETRO DE ENTRADA</th>
+		<td>
+		</td>
+	</tr>
+	<tr>
+  		<th>PARÁMETRO DE SALIDA</th>
+		<td>
+			<i>[ {<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;"id": 1,<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;"name": "John",<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;"surname": "Doe"<br/>
+			} ]</i>
+		</td>
+	</tr>
+</table>
+
+<br/>
+
+#### 2.1.3 Reservar sala
+<table>
+	<tr>
+  		<th>OPERACIÓN REST</th>
+		<td>POST</b></td>
+	</tr>
+	<tr>
+  		<th>URL PÚBLICA AL SERVICIO</th>
+		<td>localhost:8080/<b>room/book/</b></td>
+	</tr>
+	<tr>
+  		<th>PARÁMETRO DE ENTRADA</th>
+		<td>
+			<b><i>{<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;"room": {<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": Long<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;},<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;"user": {<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": Long<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+			}</i></b>
+			<br/>Ejemplo:<br/>
+			<i>{<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;"room": {<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": 3<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;},<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;"user": {<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": 1<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+			}</i>
+		</td>
+	</tr>
+	<tr>
+  		<th>PARÁMETRO DE SALIDA</th>
+		<td>
+			<i>[ {<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;"id": 3,<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;"name": "Room 3",<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;"user": {<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": 1,<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": "John",<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"surname": "Doe"<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+			} ]</i>
+		</td>
+	</tr>
+</table>
+
+<br/>
+
+#### 2.1.4 Liberar sala
+<table>
+	<tr>
+  		<th>OPERACIÓN REST</th>
+		<td>GET</b></td>
+	</tr>
+	<tr>
+  		<th>URL PÚBLICA AL SERVICIO</th>
+		<td>localhost:8083/<b>room/free/{id}</b></td>
+	</tr>
+	<tr>
+  		<th>PARÁMETRO DE ENTRADA</th>
+		<td>
+			<b>id: Long</b><br/>
+			Ejemplo: <i>.../room/free/3</i>
+		</td>
+	</tr>
+	<tr>
+  		<th>PARÁMETRO DE SALIDA</th>
+		<td>
+			<i>[ {<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;"id": 3,<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;"name": "Room 3",<br/>
+			    &nbsp;&nbsp;&nbsp;&nbsp;"user": null<br/>
+			} ]</i>
+		</td>
+	</tr>
+</table>
+
+<br/>
 
 <br/><br/>
 

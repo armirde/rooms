@@ -22,7 +22,9 @@
         * [3.3.1.1.3 Capa de API](https://github.com/armirde/rooms/blob/master/README.md#33113-capa-de-api)<br/>
       * [3.3.1.2 Usuarios](https://github.com/armirde/rooms/blob/master/README.md#3312-usuarios)<br/>
     * [3.3.2 Funcionalidad avanzada](https://github.com/armirde/rooms/blob/master/README.md#332-funcionalidad-avanzada)<br/>
-
+      * [3.3.2.1 Relacionar entidades](https://github.com/armirde/rooms/blob/master/README.md#3321-relacionar-entidades)<br/>
+      * [3.3.2.2 Reservar sala](https://github.com/armirde/rooms/blob/master/README.md#3322-reservar-sala)<br/>
+      * [3.3.2.3 Liberar sala](https://github.com/armirde/rooms/blob/master/README.md#3323-liberar-sala)<br/>
 
 <br/><br/>
 
@@ -159,13 +161,13 @@ Comprobado que el proyecto se creado corrcetamente, se procede añadir las depen
     <scope>runtime</scope>
 </dependency>
 ```
-* Se debe de incluir la configuracion necesaria de la BBDD en fichero de propiedades de la aplicación (application.properties):
+* Se debe de incluir la configuracion necesaria de la BBDD en el fichero de propiedades de la aplicación (application.properties):
 ```
 spring.h2.console.enabled=true
 ```
 * Para validar que se incializado correctamente, se puede acceder a la BBDD mediante: http://localhost:8080/h2-console/ cambiando el siguiente parámetro:
 ```
-URL:jdbc:h2:mem:testdb
+URL: jdbc:h2:mem:testdb
 ```
 <br/>
 
@@ -197,7 +199,7 @@ public class Room {
 
 }
 ```
-* En este punto ya se puede crear el script de carga incial de datos, en el directorio de recursos del proyecto (spurce.main.resources), denominado "data.sql":
+* En este punto ya se puede crear el script de carga incial de datos, en el directorio de recursos del proyecto (source.main.resources), denominado "data.sql":
 ```
 insert into room values(1, 'Room 1');
 insert into room values(2, 'Room 2');
@@ -395,15 +397,11 @@ import com.uv.rooms.mapper.RoomMapper;
 import com.uv.rooms.service.RoomService;
 
 @RestController
+@RequestMapping(value = "room")
 public class RoomController {
 	
 	@Autowired
 	RoomService service;
-	
-	@GetMapping("/health")
-	String health() {
-		return "OK";
-	}
 	
 	@GetMapping("/findAll")
 	List<RoomDto> findAll() {
@@ -414,7 +412,7 @@ public class RoomController {
 ```
 * Comprobamos el funcionamiento mediante el Postman:
 ```
-localhost:8080/findAll
+GET: localhost:8080/room/findAll
 ```
 <br/>
 
@@ -440,10 +438,185 @@ public class User {
 
     //getters y setters
 }
-
 ```
 <br/>
 
-#### 3.3.2 Funcionalidad anavanzada
+#### 3.3.2 Funcionalidad avanzada
+##### 3.3.2.1 Relacionar entidades
+* Relacionar una Sala con un Usuario a nivel de entidad, añadindo a la entidad "Room" la relación:
+```
+...
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user")
+    private User user;
+...
+    //getter y setter
+...
+```
+* Actualizar el script de carga de datos con la relación:
+```
+insert into user values(1, 'John', 'Doe');
+insert into user values(2, 'Jane', 'Doe');
 
+insert into room values(1, 'Room 1', 1);
+insert into room values(2, 'Room 2', 2);
+insert into room values(3, 'Room 3', null);
+```
+* Actualizar el DTO y el Mapper de la entidad "Room" para añadir la relación y su mapeo:
+```
+...
+    private UserDto user;
+...
+    //getter y setter
+...
+```
+```
+...
+    dto.setUser(UserMapper.fromEntity(entity.getUser()));
+...
+```
+* Comprobar con Postman que al obtener las salas, estas tienen la relación con el usuario que las ha reservado:
+```
+GET: localhost:8080/room/findAll
+```
+<br/>
+
+##### 3.3.2.2 Reservar sala
+* Crear el metodo de obtención de usuario en el servicio correspondiente (interfaz e implementación):
+```
+...
+	User findById(Long idUser);
+...
+```
+```
+...
+    	@Override
+	public User findById(Long idUser) {
+		Optional<User> optional = repository.findById(idUser);
+		if(optional.isPresent()) {
+			return optional.get();
+		} else {
+			return null;
+		}
+	}
+...
+```
+* Crear el metodo de reserva de sala en el servicio correspondiente (interfaz e implementación):
+```
+...
+	Room book(Long idRoom, Long idUser);
+...
+```
+```
+...
+	@Override
+	public Room book(Long idRoom, Long idUser) {
+		Optional<Room> optional = repository.findById(idRoom);
+		
+		if(optional.isPresent()) {
+			Room room = optional.get();
+			User user = userService.findById(idUser);
+			if(room.getUser() == null && user != null) {
+				room.setUser(user);
+				repository.save(room);
+				return room;
+			} else {
+				return null;
+			}
+		} else {
+			return null;
+		}
+	}
+...
+```
+* Crear el DTO que hara de objeto de petición:
+```
+package com.uv.rooms.dto;
+
+public class BookDto {
+	
+	private RoomDto room;
+	
+	private UserDto user;
+
+	public RoomDto getRoom() {
+		return room;
+	}
+
+	public void setRoom(RoomDto room) {
+		this.room = room;
+	}
+
+	public UserDto getUser() {
+		return user;
+	}
+
+	public void setUser(UserDto user) {
+		this.user = user;
+	}
+	
+}
+```
+* Publicar el API para acceder al servicio:
+```
+...
+	@PostMapping("/book")
+	RoomDto book(@RequestBody BookDto dto) {
+		return RoomMapper.fromEntity(service.book(dto.getRoom().getId(), dto.getUser().getId()));
+	}
+...
+```
+* Realizar petición mediante Postman al nuevo servicio de reservas:
+```
+POST: localhost:8080/room/book/
+```
+```
+{
+	"room":{
+		"id":3	
+	},
+	"user":{
+		"id":1
+	}
+}
+```
+<br/>
+
+##### 3.3.2.3 Liberar sala
+* Crear el metodo de liberación de sala en el servicio correspondiente (interfaz e implementación):
+```
+...
+	Room free(Long idRoom);
+...
+```
+```
+...
+	@Override
+	public Room free(Long idRoom) {
+		Optional<Room> optional = repository.findById(idRoom);
+		
+		if(optional.isPresent()) {
+			Room room = optional.get();
+			room.setUser(null);
+			repository.save(room);
+			return room;
+		} else {
+			return null;
+		}
+	}
+...
+```
+* Publicar el API para acceder al servicio:
+```
+...
+	@GetMapping("/free/{id}")
+	RoomDto free(@PathVariable Long id) {
+		return RoomMapper.fromEntity(service.free(id));
+	}
+...
+```
+* Realizar petición mediante Postman al nuevo servicio de liberación:
+```
+GET: localhost:8080/room/free/3
+```
 <br/>

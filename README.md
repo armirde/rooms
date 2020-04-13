@@ -87,7 +87,7 @@ Se presenta una aplicación para la gestión de salas de reunión de una oficina
 
 ### 1.3 Objetivos
 
-Lograr elaborar parte del Backend, similar al empleado en un modelo corporativo y empresarial, generando para ello las capas de negocio necesarias, gestionando Spring e Hibernate de manera cohesionada y haciendo uso de los contratos de E/S impuestos por la vista (puesto que se parte de un modelo con vista desarrollada).
+Lograr elaborar parte del Backend, similar al empleado en un modelo corporativo y empresarial, generando para ello las capas de negocio necesarias, gestionando Spring e Hibernate de manera cohesionada y haciendo uso de los contratos de E/S propuestos.
 
 Gracias al seguimiento paso a paso de la práctica, el alumno debe ser capaz de reconocer el flujo básico de la información en una metodología orientada a Servicios, así como las directivas necesarias para la consecución de un desarrollo MVC completo.
 
@@ -145,7 +145,7 @@ Creado el proyecto, se comprueba que funciona correctamente seleccionando el fic
 
 #### 3.2.1 Dependencias
 
-Comprobado que el proyecto se creado corrcetamente, se procede añadir las dependencias Maven necesarias para el funcionamiento (pom.xml):
+Comprobado que el proyecto se ha creado correctamente, se procede añadir las dependencias Maven necesarias para el funcionamiento (pom.xml):
 * Se incluye la implementación de JPA de Spring, por defecto esta basada en la implementación de JPA de Hibernate:
 ```
 <dependency>
@@ -165,7 +165,7 @@ Comprobado que el proyecto se creado corrcetamente, se procede añadir las depen
 ```
 spring.h2.console.enabled=true
 ```
-* Para validar que se incializado correctamente, se puede acceder a la BBDD mediante: http://localhost:8080/h2-console/ cambiando el siguiente parámetro:
+* Para validar que se ha incializado correctamente, se puede acceder a la BBDD mediante: http://localhost:8080/h2-console/ cambiando el siguiente parámetro:
 ```
 URL: jdbc:h2:mem:testdb
 ```
@@ -199,7 +199,7 @@ public class Room {
 
 }
 ```
-* En este punto ya se puede crear el script de carga incial de datos, en el directorio de recursos del proyecto (source.main.resources), denominado "data.sql":
+* En este punto ya se puede crear el script de carga incial de datos en el directorio de recursos del proyecto (source.main.resources), denominado "data.sql":
 ```
 insert into room values(1, 'Room 1');
 insert into room values(2, 'Room 2');
@@ -410,7 +410,7 @@ public class RoomController {
 
 }
 ```
-* Comprobamos el funcionamiento mediante el Postman:
+* Comprobamos el funcionamiento mediante Postman:
 ```
 GET: localhost:8080/room/findAll
 ```
@@ -443,7 +443,7 @@ public class User {
 
 #### 3.3.2 Funcionalidad avanzada
 ##### 3.3.2.1 Relacionar entidades
-* Relacionar una Sala con un Usuario a nivel de entidad, añadindo a la entidad "Room" la relación:
+* Relacionar una Sala con un Usuario a nivel de entidad, añadiendo a la entidad "Room" la relación:
 ```
 ...
     @ManyToOne(fetch = FetchType.LAZY)

@@ -9,16 +9,19 @@
   * [1.1 Preparación de los entornos](https://github.com/armirde/rooms/blob/master/README.md#11-preparaci%C3%B3n-de-los-entornos)<br/>
   * [1.2 Sinopsis de la Aplicación Web](https://github.com/armirde/rooms/blob/master/README.md#12-sinopsis-de-la-aplicaci%C3%B3n-web)<br/>
   * [1.3 Objetivos](https://github.com/armirde/rooms/blob/master/README.md#13-objetivos)<br/><br/>
-* [2. Presentación de la aplicación](https://github.com/armirde/rooms/blob/master/README.md#2-presentaci%C3%B3n-de-la-aplicaci%C3%B3n)<br/>
+* [2. Presentación de la aplicación](https://github.com/armirde/rooms/blob/master/README.md#2-presentaci%C3%B3n-de-la-aplicaci%C3%B3n)<br/><br/>
 * [3. Desarrollo](https://github.com/armirde/rooms/blob/master/README.md#3-desarrollo)<br/>
   * [3.1 PASO 1: Modelo de datos](https://github.com/armirde/rooms/blob/master/README.md#31-paso-1-modelo-de-datos)<br/>
   * [3.2 PASO 2: Creación del proyecto](https://github.com/armirde/rooms/blob/master/README.md#32-paso-2-creaci%C3%B3n-del-proyecto)<br/>
-	* [3.2.1 Dependencias](https://github.com/armirde/rooms/blob/master/README.md#321-dependencias)<br/>
+    * [3.2.1 Dependencias](https://github.com/armirde/rooms/blob/master/README.md#321-dependencias)<br/>
   * [3.3 PASO 3: Construcción del backend](https://github.com/armirde/rooms/blob/master/README.md#33-paso-3-construcci%C3%B3n-del-backend)<br/>
-    * [3.3.1 Capa de acceso a datos](https://github.com/armirde/rooms/blob/master/README.md#331-capa-de-acceso-a-datos)<br/>
-    * [3.3.2 Capa lógica de negocio](https://github.com/armirde/rooms/blob/master/README.md#332-capa-l%C3%B3gica-de-negocio)<br/>
-    * [3.3.3 Capa de API](https://github.com/armirde/rooms/blob/master/README.md#333-capa-de-api)<br/>
-    * [3.3.4 Resto](https://github.com/armirde/rooms/blob/master/README.md#334-resto)<br/>
+    * [3.3.1 Funcionalidad básica](https://github.com/armirde/rooms/blob/master/README.md#331-funcionalidad-b%C3%A1sica)<br/>
+      * [3.3.1.1 Salas](https://github.com/armirde/rooms/blob/master/README.md#3311-salas)<br/>
+        * [3.3.1.1.1 Capa de acceso a datos](https://github.com/armirde/rooms/blob/master/README.md#33111-capa-de-acceso-a-datos)<br/>
+        * [3.3.1.1.2 Capa lógica de negocio](https://github.com/armirde/rooms/blob/master/README.md#33112-capa-l%C3%B3gica-de-negocio)<br/>
+        * [3.3.1.1.3 Capa de API](https://github.com/armirde/rooms/blob/master/README.md#33113-capa-de-api)<br/>
+      * [3.3.1.2 Usuarios](https://github.com/armirde/rooms/blob/master/README.md#3312-usuarios)<br/>
+    * [3.3.2 Funcionalidad avanzada](https://github.com/armirde/rooms/blob/master/README.md#332-funcionalidad-avanzada)<br/>
 
 
 <br/><br/>
@@ -73,7 +76,7 @@ C:\dev\jdk1.8.0_172\bin\javaw.exe
 
 ### 1.2 Sinopsis de la Aplicación Web
 
-Se presenta una aplicación para la gestión de salas de reunión de una oficina. En ella, se puede encontrar dos opciones:
+Se presenta una aplicación para la gestión de salas de reunión de una oficina. En ella, se puede encontrar estas opciones:
 * __Listado de salas:__ Donde se presentará el listado de salas y su estado.
 * __Listado de usuarios:__ Donde se presentará el listado de usuarios.
 * __Reservar de sala:__ Donde se permite realizar la reserva/liberación de una sala para un usuario.
@@ -121,7 +124,7 @@ Se parte de un modelo de datos propuesto, es posible visualizar la definición c
 	<tr><th>NOMBRE</th><th>TIPO</th></tr>
 	<tr><td>ID (PK)</td><td>BIGINT(16)</td></tr>
 	<tr><td>NAME</td><td>VARCHAR(255)</td></tr>
-  <tr><td>LASTNAME</td><td>VARCHAR(255)</td></tr>
+  	<tr><td>SURTNAME</td><td>VARCHAR(255)</td></tr>
 </table>
 
 <br/>
@@ -168,9 +171,11 @@ URL:jdbc:h2:mem:testdb
 
 ### 3.3 PASO 3: Construcción del backend
 
-<br/>
+#### 3.3.1 Funcionalidad básica
 
-#### 3.3.1 Capa de acceso a datos
+##### 3.3.1.1 Salas
+
+###### 3.3.1.1.1 Capa de acceso a datos
 * Creación de la entidad:
 ```
 package com.uv.rooms.model;
@@ -215,7 +220,7 @@ public interface RoomJpaRepository extends JpaRepository<Room, Long> {
 
 <br/>
 
-#### 3.3.2 Capa lógica de negocio
+###### 3.3.1.1.2 Capa lógica de negocio
 * Creación de la interface service:
 ```
 package com.uv.rooms.service;
@@ -294,7 +299,7 @@ Run as "JUnit Test" (JUnit 4)
 
 <br/>
 
-#### 3.3.3 Capa de API
+###### 3.3.1.1.3 Capa de API
 * Añadir la dependencia necesarias (pom.xml):
 ```
 <dependency>
@@ -413,4 +418,32 @@ localhost:8080/findAll
 ```
 <br/>
 
-#### 3.3.4 Resto
+##### 3.3.1.2 Usuarios
+* Creación de la misma estructura que en el caso de salas para la entidad User:
+```
+package com.uv.rooms.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
+public class User {
+	
+    @Id
+    @GeneratedValue
+    private Long id;
+    
+    private String name;
+    
+    private String surname;
+
+    //getters y setters
+}
+
+```
+<br/>
+
+#### 3.3.2 Funcionalidad anavanzada
+
+<br/>

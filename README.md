@@ -46,7 +46,7 @@ Se pretende seguir una metodología de desarrollo ordenada y coherente con la pr
 ### 1.1 Preparación de los entornos
 
 Los pasos a seguir para la correcta preparación de los entornos son:
-*	Descarga del ZIP con el JDK y Maven: https://github.com/armirde
+*	Descarga del ZIP con el JDK y Maven: https://github.com/armirde/rooms/tree/master/resources
 *	Descarga del IDE STS(4.6.0): https://spring.io/tools
 *	Instalación de Postman(7.22): https://www.postman.com/downloads/
 *	Crear directorios "C:\dev\" y dentro "C:\dev\workspace"
@@ -75,7 +75,7 @@ C:\dev\jdk1.8.0_172\bin\javaw.exe
 
 Se presenta una aplicación para la gestión de salas de reunión de una oficina. En ella, se puede encontrar dos opciones:
 * __Listado de salas:__ Donde se presentará el listado de salas y su estado.
-* __Listado de usuarios:__ Donde se presentará el listado de usuarios y las salas que tiene reservadas.
+* __Listado de usuarios:__ Donde se presentará el listado de usuarios.
 * __Reservar de sala:__ Donde se permite realizar la reserva/liberación de una sala para un usuario.
 
 <br/>

@@ -304,6 +304,13 @@ Comprobado que el proyecto se ha creado correctamente, se procede añadir las de
     <artifactId>spring-boot-starter-data-jpa</artifactId>
 </dependency>
 ```
+* Añadir la dependencia para poder publicar servicios REST:
+```
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-rest</artifactId>
+</dependency>
+```
 * Se añade la dependencia de la BBDD embebida para almacenar los datos del aplicativo:
 ```
 <dependency>
@@ -453,13 +460,6 @@ Run as "JUnit Test" (JUnit 4)
 <br/>
 
 ###### 3.3.1.1.3 Capa de API
-* Añadir la dependencia necesarias (pom.xml):
-```
-<dependency>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-data-rest</artifactId>
-</dependency>
-```
 * Crear el controller correspondiente:
 ```
 package com.uv.rooms.controller;

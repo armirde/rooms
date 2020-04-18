@@ -483,6 +483,8 @@ localhost:8080/health
 ```
 * Creamos el DTO y el Mapper necesarios:
 ```
+package com.uv.rooms.dto;
+
 public class RoomDto {
 	
     private Long id;

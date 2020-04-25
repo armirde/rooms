@@ -662,6 +662,9 @@ GET: localhost:8080/room/findAll
 ```
 ```
 ...
+	@Autowired
+	UserService userService;
+...
 	@Override
 	public Room book(Long idRoom, Long idUser) {
 		Optional<Room> optional = repository.findById(idRoom);

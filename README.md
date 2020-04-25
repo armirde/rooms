@@ -77,7 +77,7 @@ openFile
 C:\dev\jdk1.8.0_172\bin\javaw.exe
 ...
 ```
-* Abrir el IDE y comprobar que arranca correctamente
+* Abrir el IDE (seleccionando como ruta de workspace --> "C:\dev\workspace") y comprobar que arranca correctamente
 
 <br/>
 

@@ -30,7 +30,7 @@
       * [3.3.2.1 Relacionar entidades](https://github.com/armirde/rooms/blob/master/README.md#3321-relacionar-entidades)<br/>
       * [3.3.2.2 Reservar sala](https://github.com/armirde/rooms/blob/master/README.md#3322-reservar-sala)<br/>
       * [3.3.2.3 Liberar sala](https://github.com/armirde/rooms/blob/master/README.md#3323-liberar-sala)<br/>
-
+* [4. Documentación adicional](https://github.com/armirde/rooms/blob/master/README.md#4-documentaci%C3%B3n-adicional)<br/>
 <br/><br/>
 
 ## 1. Introducción
@@ -776,3 +776,11 @@ POST: localhost:8080/room/book/
 GET: localhost:8080/room/free/3
 ```
 <br/>
+
+## 4. Documentación adicional
+
+<br/>
+
+* Spring Boot: https://spring.io/projects/spring-boot
+
+* Spring Data: https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#reference

@@ -47,7 +47,7 @@ Para el presente proyecto se dispone de un repositorio GitHub (https://github.co
 *	El proyecto completo tras realizar todos los pasos.
 * Un comprimido con algunas de las aplicaciones necesarias para el desarrollo (JDK, Maven).
 <br/>
-La estructura del código está orientada a un modelo de Servicios, haciendo que sea posible el aislamiento y modularización de cada parte del desarrollo. Asimismo, tanto para vista como para negocio, se emplea una arquitectura MVC (Modelo-Vista-Controlador) bien diferenciada y permitiendo la centralización en negocio y en arquitectura, pero no en vista.
+La estructura del código está orientada a un modelo de Servicios, haciendo que sea posible el aislamiento y modularización de cada parte del desarrollo. Asimismo, se emplea una arquitectura MVC (Modelo-Vista-Controlador) bien diferenciada y permitiendo la centralización en negocio y en arquitectura, pero no en vista.
 
 Se pretende seguir una metodología de desarrollo ordenada y coherente con la programación incremental. Para ello, se presentarán etapas, donde sobre cada una, se establecerá un hito bien definido (Model, Repository, Service y Controller). La conjunción de hitos conllevará la consecución de la práctica.
 

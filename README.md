@@ -57,7 +57,7 @@ Se pretende seguir una metodología de desarrollo ordenada y coherente con la pr
 
 Los pasos a seguir para la correcta preparación de los entornos son:
 *	Descarga del RAR con el JDK y Maven: https://github.com/armirde/rooms/tree/master/resources
-*	Descarga del IDE STS(4.6.0): https://spring.io/tools
+*	Descarga del IDE STS(4.6.1): https://spring.io/tools
 *	Instalación de Postman(7.22): https://www.postman.com/downloads/
 *	Crear directorios "C:\dev\" y dentro "C:\dev\workspace"
 * Descomprimir el JDK, Maven y el IDE en "C:\dev\"

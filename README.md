@@ -69,7 +69,7 @@ Añadir a "path": "%JAVA_HOME%\bin"
 Crear variable de entorno: "M2_HOME=C:\dev\apache-maven-3.5.4"
 Añadir a "path": "%M2_HOME%\bin"
 ```
-* Editar el fichero de arranque del IDE (C:\dev\sts-4.6.0.RELEASE\SpringToolSuite4.ini) añadiendo:
+* Editar el fichero de arranque del IDE (C:\dev\sts-4.6.1.RELEASE\SpringToolSuite4.ini) añadiendo:
 ```
 ...
 openFile

@@ -37,7 +37,7 @@
 
 Se propone una aplicación, basada en el siguiente software de carácter tecnológico:
 *	Spring Boot (v2.2.6)
-*	Spring Boot Data (v2.2.6)
+*	Spring Data (v2.2.6)
 *	JDK (v1.8)
 *	Maven (v3.5.4)
 <br/>

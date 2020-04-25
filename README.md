@@ -95,13 +95,13 @@ Se presenta una aplicación para la gestión de salas de reunión de una oficina
 
 Lograr elaborar parte del Backend, similar al empleado en un modelo corporativo y empresarial, generando para ello las capas de negocio necesarias, gestionando Spring e Hibernate de manera cohesionada y haciendo uso de los contratos de E/S propuestos.
 
-Gracias al seguimiento paso a paso de la práctica, el alumno debe ser capaz de reconocer el flujo básico de la información en una metodología orientada a Servicios, así como las directivas necesarias para la consecución de un desarrollo MVC completo.
+Gracias al seguimiento paso a paso de la práctica, el alumnado debe ser capaz de reconocer el flujo básico de la información en una metodología orientada a Servicios, así como las directivas necesarias para la consecución de un desarrollo MVC completo.
 
 <br/><br/>
 
 ## 2. Presentación de la aplicación
 
-Tal como se ha detallado anteriormente, vamos a completar una herramienta para la gestión de salas de reunión. Hoy en día, casi todas las aplicaciones web poseen parte móvil y parte web, pero en este caso únicamente nos centraremos en el backend, puesto que seguiremos el concepto de centralización de negocio (backend único, sea cual sea el número de fronts).
+Tal como se ha detallado anteriormente, vamos a completar una herramienta para la gestión de salas de reunión. Hoy en día, casi todas las aplicaciones web poseen parte móvil y parte web, pero en este caso, únicamente nos centraremos en el backend, puesto que seguiremos el concepto de centralización de negocio (backend único, sea cual sea el número de fronts).
 
 ### 2.1 Contratos desde frontend a backend
 
@@ -290,14 +290,14 @@ Se crea una aplicacción mediante "Spring Starter Project" cambiando unicamente 
 * Artifact : rooms
 * Package : com.uv.rooms
 
-Creado el proyecto, se comprueba que funciona correctamente seleccionando el fichero "bootable" RoomsApplication.java y lanzandolo mediante "Run as Spring Boot App".
+Creado el proyecto, se comprueba que funciona correctamente seleccionando el fichero "bootable" RoomsApplication.java y lanzándolo mediante "Run as Spring Boot App".
 
 <br/>
 
 #### 3.2.1 Dependencias
 
 Comprobado que el proyecto se ha creado correctamente, se procede añadir las dependencias Maven necesarias para el funcionamiento (pom.xml):
-* Se incluye la implementación de JPA de Spring, por defecto esta basada en la implementación de JPA de Hibernate:
+* Se incluye la implementación de JPA de Spring, por defecto está basada en la implementación de JPA de Hibernate:
 ```
 <dependency>
     <groupId>org.springframework.boot</groupId>
@@ -323,7 +323,7 @@ Comprobado que el proyecto se ha creado correctamente, se procede añadir las de
 ```
 spring.h2.console.enabled=true
 ```
-* Para validar que se ha incializado correctamente, se puede acceder a la BBDD mediante: http://localhost:8080/h2-console/ cambiando el siguiente parámetro:
+* Para validar que se ha inicializado correctamente, se puede acceder a la BBDD mediante: http://localhost:8080/h2-console/ cambiando el siguiente parámetro:
 ```
 URL: jdbc:h2:mem:testdb
 ```
@@ -635,7 +635,7 @@ GET: localhost:8080/room/findAll
 <br/>
 
 ##### 3.3.2.2 Reservar sala
-* Crear el metodo de obtención de usuario en el servicio correspondiente (interfaz e implementación):
+* Crear el método de obtención de usuario en el servicio correspondiente (interfaz e implementación):
 ```
 ...
 	User findById(Long idUser);
@@ -654,7 +654,7 @@ GET: localhost:8080/room/findAll
 	}
 ...
 ```
-* Crear el metodo de reserva de sala en el servicio correspondiente (interfaz e implementación):
+* Crear el método de reserva de sala en el servicio correspondiente (interfaz e implementación):
 ```
 ...
 	Room book(Long idRoom, Long idUser);
@@ -739,7 +739,7 @@ POST: localhost:8080/room/book/
 <br/>
 
 ##### 3.3.2.3 Liberar sala
-* Crear el metodo de liberación de sala en el servicio correspondiente (interfaz e implementación):
+* Crear el método de liberación de sala en el servicio correspondiente (interfaz e implementación):
 ```
 ...
 	Room free(Long idRoom);

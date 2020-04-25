@@ -438,7 +438,7 @@ import com.uv.rooms.service.RoomService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class BookServiceUnitTest {
+public class RoomServiceUnitTest {
 	
 	@Autowired
 	RoomService service;

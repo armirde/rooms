@@ -266,7 +266,7 @@ Se parte de un modelo de datos propuesto, es posible visualizar la definición c
 	<tr><th>NOMBRE</th><th>TIPO</th></tr>
 	<tr><td>ID (PK)</td><td>BIGINT(16)</td></tr>
 	<tr><td>NAME</td><td>VARCHAR(255)</td></tr>
-	<tr><td>USER</td><td>BIGINT(16)</td></tr>
+	<tr><td>USER (FK)</td><td>BIGINT(16)</td></tr>
 </table>
 <br/>
 <table>
